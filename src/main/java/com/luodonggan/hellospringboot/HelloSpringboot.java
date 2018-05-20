@@ -10,9 +10,8 @@
  */
 package com.luodonggan.hellospringboot;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * 〈一句话功能简述〉<br> 
@@ -24,9 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class HelloSpringboot {
-    @RequestMapping(value = "/hello",method = RequestMethod.GET)
-    public String say(){
+    @Autowired
+    private ball ballpropertis;
 
-        return "Hello Spring Boot!!";
+//    @RequestMapping(value = {"/hello","/hi"},method = RequestMethod.GET)
+    //简化写法
+    @GetMapping(value={"hello","hi"})
+public String say(@RequestParam(value = "id" ,required = false,defaultValue = "0" ) Integer myId){
+//            return "球的大小:"+ballpropertis.getSize()+"\n"+"颜色："+ballpropertis.getColor();
+        return  "id="+myId;
+//          return cupSize;
+//        return "Hello Spring Boot!!";
     }
 }
